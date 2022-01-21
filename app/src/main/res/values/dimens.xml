@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="craft_side">300dp</dimen>
+    <dimen name="text_size">17sp</dimen>
+    <dimen name="margin_craft">20dp</dimen>
+    <dimen name="margin_level">30dp</dimen>
+</resources>

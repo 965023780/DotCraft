@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DotCraft</string>
+    <string name="game_simple">简单</string>
+    <string name="game_medium">普通</string>
+    <string name="game_difficult">困难</string>
+    <string name="game_start">开始游戏</string>
+    <string name="game_reset">重新开始</string>
+    <string name="tv_time_default">时间:0 s</string>
+</resources>
