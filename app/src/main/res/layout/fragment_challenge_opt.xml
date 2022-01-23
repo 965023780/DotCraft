@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <include
-        android:id="@+id/title"
-        layout="@layout/common_title" />
-
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_simple"
@@ -17,9 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/btn_medium"
-        android:layout_marginBottom="@dimen/margin_level"
-        android:background="@drawable/selector_btn_start"
-        android:text="@string/game_simple"
+        android:layout_marginBottom="@dimen/margin_challenge"
+        android:background="@drawable/selector_btn"
+        android:text="@string/challenge_simple"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size"
         android:textStyle="bold" />
@@ -30,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/selector_btn_start"
-        android:text="@string/game_medium"
+        android:background="@drawable/selector_btn"
+        android:text="@string/challenge_medium"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size"
         android:textStyle="bold"
@@ -43,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/btn_medium"
-        android:layout_marginTop="@dimen/margin_level"
-        android:background="@drawable/selector_btn_start"
-        android:text="@string/game_difficult"
+        android:layout_marginTop="@dimen/margin_challenge"
+        android:background="@drawable/selector_btn"
+        android:text="@string/challenge_difficult"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size"
         android:textStyle="bold" />

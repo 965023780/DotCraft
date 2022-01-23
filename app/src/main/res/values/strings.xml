@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">DotCraft</string>
-    <string name="game_simple">简单</string>
-    <string name="game_medium">普通</string>
-    <string name="game_difficult">困难</string>
+
+    <!--opt-->
+    <string name="opt_level">关卡模式</string>
+    <string name="opt_challenge">挑战模式</string>
+    <string name="opt_custom">自定义模式</string>
+    <string name="opt_rank">排行榜</string>
+
+    <!--challenge-->
+    <string name="challenge_simple">简单</string>
+    <string name="challenge_medium">普通</string>
+    <string name="challenge_difficult">困难</string>
+
+    <!--game-->
     <string name="game_start">开始游戏</string>
     <string name="game_reset">重新开始</string>
     <string name="tv_time_default">时间:0 s</string>

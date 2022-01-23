@@ -1,58 +1,46 @@
-package com.example.dotcraft
+package com.example.dotcraft.base
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.*
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
+import com.example.dotcraft.App
+import com.example.dotcraft.R
+import com.example.dotcraft.challenge.ChallengeActivity
+import com.example.dotcraft.opt.OptActivity
 import com.example.dotcraft.widget.CraftView
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, CraftView.OnCraftViewListener {
-    private var craftView: CraftView? = null
+open class BaseCraftActivity : BaseActivity(), View.OnClickListener, CraftView.OnCraftViewListener {
+    protected var craftView: CraftView? = null
     private var btnStart: AppCompatButton? = null
     private var textView: TextView? = null
     private var mTime = 0
     private var mTimeHandler: Handler? = null
     private var mTimeHandlerThread: HandlerThread? = null
     private val MESSAGE_TIME = 1000
-    private val mTaskThread = Thread { mUiHandler.sendEmptyMessage(MESSAGE_TIME)}
+    private val mTaskThread = Thread { mUiHandler.sendEmptyMessage(MESSAGE_TIME) }
     private val mUiHandler by lazy {
         UiHandler(Looper.getMainLooper())
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutResID(): Int = R.layout.activity_craft
+
+    override fun init() {
         initView()
         mTimeHandlerThread = HandlerThread("timeCount")
         mTimeHandlerThread!!.start()
         mTimeHandler = Handler(mTimeHandlerThread!!.looper)
     }
 
-    private fun initView() {
+    protected open fun initView() {
         craftView = findViewById(R.id.vp_craft)
-        when (App.getContext()?.mLevel) {
-            App.Level.SIMPLE -> {
-                craftView!!.init(3, 3, 4)
-            }
-            App.Level.MEDIUM -> {
-                craftView!!.init(4, 4, 8)
-            }
-            App.Level.DIFFICULT -> {
-                craftView!!.init(5, 5, 12)
-            }
-            else -> {
-
-            }
-        }
         craftView!!.mListener = this
-
         btnStart = findViewById(R.id.btn_start)
         btnStart!!.setOnClickListener(this)
-
         textView = findViewById(R.id.tv_time)
         findViewById<AppCompatImageView>(R.id.iv_back).setOnClickListener(this)
     }
@@ -75,8 +63,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, CraftView.OnCraf
                 }
             }
             R.id.iv_back -> {
-                val intent = Intent(this, LevelActivity::class.java)
+                val intent = Intent(this, OptActivity::class.java)
                 startActivity(intent)
+                this.finish()
             }
         }
     }
@@ -107,6 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, CraftView.OnCraf
 
     inner class UiHandler(looper: Looper) : Handler(looper) {
 
+        @SuppressLint("SetTextI18n")
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             when (msg.what) {

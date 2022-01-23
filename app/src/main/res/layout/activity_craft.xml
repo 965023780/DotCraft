@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".base.BaseCraftActivity">
 
     <include layout="@layout/common_title" />
 
@@ -14,7 +14,7 @@
         android:layout_above="@+id/vp_craft"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_craft"
-        android:background="@drawable/selector_btn_start"
+        android:background="@drawable/selector_btn"
         android:text="@string/game_start"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size"

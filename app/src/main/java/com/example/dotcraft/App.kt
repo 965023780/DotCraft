@@ -1,6 +1,8 @@
 package com.example.dotcraft
 
 import android.app.Application
+import com.example.dotcraft.challenge.strategy.ChallengeStrategy
+import com.example.dotcraft.util.SharedPreferencesUtil
 
 class App : Application() {
 
@@ -13,17 +15,15 @@ class App : Application() {
         }
     }
 
-    var mLevel: Level? = null
+    var mLevelPassed = 0
+    var mChallengeStrategy: ChallengeStrategy? = null
 
     override fun onCreate() {
         super.onCreate()
         mContext = this
+        SharedPreferencesUtil.instance.init(applicationContext)
+        mLevelPassed = SharedPreferencesUtil.instance.getLevelPassed()
     }
 
-    enum class Level {
-        SIMPLE,
-        MEDIUM,
-        DIFFICULT
-    }
 
 }
