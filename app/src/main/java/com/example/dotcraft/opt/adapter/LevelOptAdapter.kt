@@ -12,7 +12,7 @@ import com.example.dotcraft.R
 import com.example.dotcraft.level.bean.LevelBean
 import com.example.dotcraft.level.strategy.LevelStrategy
 
-class LevelOptAdapter(private val mContext: Context) :
+class LevelOptAdapter(private val mContext: Context, private val mListener: OnItemListener) :
     RecyclerView.Adapter<LevelOptAdapter.LevelOptViewHolder>() {
     private val levelStrategyList: ArrayList<LevelBean> = ArrayList()
 
@@ -41,6 +41,9 @@ class LevelOptAdapter(private val mContext: Context) :
         } else {
             ContextCompat.getDrawable(mContext, R.drawable.shape_not_passed_bg)
         }
+        holder.itemView.setOnClickListener() {
+            mListener.onClick(levelStrategyList[position])
+        }
     }
 
     override fun getItemCount(): Int = levelStrategyList.size
@@ -54,5 +57,8 @@ class LevelOptAdapter(private val mContext: Context) :
         }
     }
 
+    interface OnItemListener {
+        fun onClick(level: LevelBean)
+    }
 
 }

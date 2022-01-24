@@ -1,11 +1,10 @@
 package com.example.dotcraft.challenge
 
-import android.view.View
 import com.example.dotcraft.App
 
 import com.example.dotcraft.base.BaseCraftActivity
 
-class ChallengeActivity : BaseCraftActivity(), View.OnClickListener {
+class ChallengeActivity : BaseCraftActivity() {
 
 
     override fun initView() {

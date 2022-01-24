@@ -2,9 +2,9 @@ package com.example.dotcraft.level.strategy
 
 import com.example.dotcraft.widget.DotView
 
-class Level2: BaseLevel() {
+class Level2 : BaseLevel() {
 
-    init{
+    init {
         for (i in 0 until 3) {
             val array = Array(3) { DotView.DotType.BLACK }
             val curArray = Array(3) { DotView.DotType.BLACK }
@@ -12,6 +12,15 @@ class Level2: BaseLevel() {
             mCurTypeList.add(curArray)
         }
 
+        mTypeList[0][0] = DotView.DotType.WHITE
+        mTypeList[1][1] = DotView.DotType.WHITE
+        mTypeList[1][2] = DotView.DotType.WHITE
+        mTypeList[2][1] = DotView.DotType.WHITE
+
+        mCurTypeList[0][2] = DotView.DotType.WHITE
+        mCurTypeList[1][0] = DotView.DotType.WHITE
+        mCurTypeList[1][2] = DotView.DotType.WHITE
+        mCurTypeList[2][0] = DotView.DotType.WHITE
     }
 
 }

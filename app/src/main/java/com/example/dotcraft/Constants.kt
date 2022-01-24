@@ -14,6 +14,7 @@ interface Constants {
             const val OPT_STATUS_MAIN = "status_main"
             const val OPT_STATUS_CHALLENGE = "status_challenge"
             const val OPT_STATUS_LEVEL = "status_level"
+            const val LEVEL = "level"
         }
     }
 }
