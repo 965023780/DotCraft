@@ -7,7 +7,7 @@ import com.example.dotcraft.Constants
 class SharedPreferencesUtil private constructor() {
 
     companion object {
-        val instance: SharedPreferencesUtil by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+        val instance: SharedPreferencesUtil by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             SharedPreferencesUtil()
         }
     }

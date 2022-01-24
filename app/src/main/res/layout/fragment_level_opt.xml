@@ -3,4 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_level"
+        android:layout_width="@dimen/rv_level_side"
+        android:layout_height="@dimen/rv_level_side"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_bg" />
+
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.dotcraft.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
@@ -52,6 +53,34 @@ class CraftView : ViewGroup {
         LayoutParams(0, 0)
     }
 
+
+    fun init(
+        typeList: ArrayList<Array<DotView.DotType>>, curTypeList: ArrayList<Array<DotView.DotType>>
+    ) {
+        mRow = typeList.size
+        if (mRow == 0) {
+            return
+        }
+        mCol = typeList[0].size
+        if (mCol == 0) {
+            return
+        }
+        initParams()
+        addDotView()
+        for (i in 0 until mRow) {
+            for (j in 0 until mCol) {
+                mTypeList[i][j] = typeList[i][j]
+                mCurTypeList[i][j] = curTypeList[i][j]
+                if (typeList[i][j] == DotView.DotType.WHITE) {
+                    val childView = CirqueView(context)
+                    childView.layoutParams = mCirqueLayoutParams
+                    addView(childView)
+                }
+            }
+        }
+        postInvalidate()
+    }
+
     /*
         随机初始化
      */
@@ -62,13 +91,6 @@ class CraftView : ViewGroup {
         initParams(row, col, whiteDotNumber)
         addDotView()
         postInvalidate()
-
-        for (i in 0 until row) {
-            val array = Array(col) { DotView.DotType.BLACK }
-            val curArray = Array(col) { DotView.DotType.BLACK }
-            mTypeList.add(array)
-            mCurTypeList.add(curArray)
-        }
         for (i in 0 until whiteDotNumber) {
             while (true) {
                 val randRow = (0 until row).random()
@@ -105,6 +127,28 @@ class CraftView : ViewGroup {
         mBackupDot.layoutParams = mDotLayoutParams
         mBackupDot.visibility = View.INVISIBLE
         mStatus = CraftStatus.IDLE
+        for (i in 0 until row) {
+            val array = Array(col) { DotView.DotType.BLACK }
+            val curArray = Array(col) { DotView.DotType.BLACK }
+            mTypeList.add(array)
+            mCurTypeList.add(curArray)
+        }
+    }
+
+    private fun initParams() {
+        removeAllViews()
+        mTypeList.clear()
+        mCurTypeList.clear()
+        mBackupDot.layoutParams = mDotLayoutParams
+        mBackupDot.visibility = View.INVISIBLE
+        mStatus = CraftStatus.IDLE
+        mWhiteDotNumber = 0
+        for (i in 0 until mRow) {
+            val array = Array(mCol) { DotView.DotType.BLACK }
+            val curArray = Array(mCol) { DotView.DotType.BLACK }
+            mTypeList.add(array)
+            mCurTypeList.add(curArray)
+        }
     }
 
     private fun addDotView() {
@@ -211,6 +255,7 @@ class CraftView : ViewGroup {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (mStatus == CraftStatus.IDLE) {
             return super.onTouchEvent(event)

@@ -11,7 +11,8 @@ import com.example.dotcraft.challenge.strategy.DifficultStrategy
 import com.example.dotcraft.challenge.strategy.MediumStrategy
 import com.example.dotcraft.challenge.strategy.SimpleStrategy
 
-class ChallengeOptFragment(listener: FragmentListener) : BaseFragment(listener), View.OnClickListener {
+class ChallengeOptFragment(listener: FragmentListener) : BaseFragment(listener),
+    View.OnClickListener {
 
     override fun getLayoutResID(): Int = R.layout.fragment_challenge_opt
 
@@ -34,7 +35,7 @@ class ChallengeOptFragment(listener: FragmentListener) : BaseFragment(listener),
                 App.getContext()!!.mChallengeStrategy = DifficultStrategy.instance
             }
         }
-        if (App.getContext()!!.mChallengeStrategy != null) {
+        App.getContext()!!.mChallengeStrategy?.let {
             startActivity(intent)
             activity?.finish()
         }

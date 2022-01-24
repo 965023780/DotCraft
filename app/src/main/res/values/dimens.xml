@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="title_height">50dp</dimen>
     <dimen name="craft_side">300dp</dimen>
     <dimen name="text_size">17sp</dimen>
     <dimen name="margin_craft">20dp</dimen>
     <dimen name="margin_opt">30dp</dimen>
     <dimen name="margin_challenge">30dp</dimen>
+    <dimen name="rv_level_side">300dp</dimen>
+    <dimen name="item_level_side">50dp</dimen>
+    <dimen name="item_level_padding">25dp</dimen>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/item_level_padding">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_level_sequence"
+        android:layout_width="@dimen/item_level_side"
+        android:layout_height="@dimen/item_level_side"
+        android:gravity="center"
+        android:background="@drawable/shape_not_passed_bg"
+        android:textSize="@dimen/text_size" />
+</LinearLayout>
