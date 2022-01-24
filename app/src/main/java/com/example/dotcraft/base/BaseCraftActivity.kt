@@ -8,17 +8,16 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
-import com.example.dotcraft.App
 import com.example.dotcraft.R
-import com.example.dotcraft.challenge.ChallengeActivity
 import com.example.dotcraft.opt.OptActivity
+import com.example.dotcraft.widget.CirqueView
 import com.example.dotcraft.widget.CraftView
 
-open class BaseCraftActivity : BaseActivity(), View.OnClickListener, CraftView.OnCraftViewListener {
+abstract class BaseCraftActivity : BaseActivity(), View.OnClickListener, CirqueView.OnViewListener {
     protected var craftView: CraftView? = null
     private var btnStart: AppCompatButton? = null
     private var textView: TextView? = null
-    private var mTime = 0
+    protected var mTime = 0L
     private var mTimeHandler: Handler? = null
     private var mTimeHandlerThread: HandlerThread? = null
     private val MESSAGE_TIME = 1000
@@ -56,7 +55,7 @@ open class BaseCraftActivity : BaseActivity(), View.OnClickListener, CraftView.O
                     }
                     else -> {
                         craftView!!.mStatus = CraftView.CraftStatus.IDLE
-                        craftView!!.reset()
+                        reset()
                         stopTime()
                         btnStart!!.text = getString(R.string.game_start)
                     }
@@ -65,7 +64,7 @@ open class BaseCraftActivity : BaseActivity(), View.OnClickListener, CraftView.O
             R.id.iv_back -> {
                 val intent = Intent(this, OptActivity::class.java)
                 startActivity(intent)
-                this.finish()
+                finish()
             }
         }
     }
@@ -81,17 +80,23 @@ open class BaseCraftActivity : BaseActivity(), View.OnClickListener, CraftView.O
         textView!!.text = getString(R.string.tv_time_default)
     }
 
+    override fun onAnimStartListener() {
+        mUiHandler.removeMessages(MESSAGE_TIME)
+        saveSuccessInf()
+    }
 
-    override fun onSuccess() {
+    override fun onAnimEndListener() {
         AlertDialog.Builder(this).setTitle("成功！").setMessage("共耗时$mTime s").create().show()
-        stopTime()
-        craftView!!.reset()
+        mTime = 0
+        reset()
         btnStart!!.text = getString(R.string.game_start)
+        textView!!.text = getString(R.string.tv_time_default)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mUiHandler.removeMessages(MESSAGE_TIME)
+        saveContinueInf()
     }
 
     inner class UiHandler(looper: Looper) : Handler(looper) {
@@ -109,4 +114,9 @@ open class BaseCraftActivity : BaseActivity(), View.OnClickListener, CraftView.O
         }
     }
 
+    abstract fun reset()
+
+    abstract fun saveSuccessInf()
+
+    abstract fun saveContinueInf()
 }

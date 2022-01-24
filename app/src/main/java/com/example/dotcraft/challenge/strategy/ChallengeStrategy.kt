@@ -4,4 +4,5 @@ interface ChallengeStrategy {
     fun getRows(): Int
     fun getCols(): Int
     fun getWhiteDotNumbers(): Int
+    fun getChallengeTag(): String
 }

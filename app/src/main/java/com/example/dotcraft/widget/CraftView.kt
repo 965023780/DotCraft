@@ -30,7 +30,7 @@ class CraftView : ViewGroup {
     private var mTargetIndex = -1
 
     var mStatus = CraftStatus.IDLE
-    var mListener: OnCraftViewListener? = null
+    var mListener: CirqueView.OnViewListener? = null
 
     private val CHILD_OFFSET = dp2px(10)
     private val mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
@@ -57,15 +57,10 @@ class CraftView : ViewGroup {
     fun init(
         typeList: ArrayList<Array<DotView.DotType>>, curTypeList: ArrayList<Array<DotView.DotType>>
     ) {
-        mRow = typeList.size
-        if (mRow == 0) {
+        if (typeList.isEmpty() || typeList[0].isEmpty()) {
             return
         }
-        mCol = typeList[0].size
-        if (mCol == 0) {
-            return
-        }
-        initParams()
+        initParams(typeList)
         addDotView()
         for (i in 0 until mRow) {
             for (j in 0 until mCol) {
@@ -75,9 +70,11 @@ class CraftView : ViewGroup {
                     val childView = CirqueView(context)
                     childView.layoutParams = mCirqueLayoutParams
                     addView(childView)
+                    mWhiteDotNumber++
                 }
             }
         }
+        (getChildAt(mRow * mCol + 1) as CirqueView).mListener = mListener
         postInvalidate()
     }
 
@@ -90,7 +87,6 @@ class CraftView : ViewGroup {
         }
         initParams(row, col, whiteDotNumber)
         addDotView()
-        postInvalidate()
         for (i in 0 until whiteDotNumber) {
             while (true) {
                 val randRow = (0 until row).random()
@@ -112,8 +108,8 @@ class CraftView : ViewGroup {
                 }
             }
         }
-
-
+        (getChildAt(mRow * mCol + 1) as CirqueView).mListener = mListener
+        postInvalidate()
     }
 
 
@@ -135,7 +131,7 @@ class CraftView : ViewGroup {
         }
     }
 
-    private fun initParams() {
+    private fun initParams(typeList: ArrayList<Array<DotView.DotType>>) {
         removeAllViews()
         mTypeList.clear()
         mCurTypeList.clear()
@@ -143,6 +139,8 @@ class CraftView : ViewGroup {
         mBackupDot.visibility = View.INVISIBLE
         mStatus = CraftStatus.IDLE
         mWhiteDotNumber = 0
+        mRow = typeList.size
+        mCol = typeList[0].size
         for (i in 0 until mRow) {
             val array = Array(mCol) { DotView.DotType.BLACK }
             val curArray = Array(mCol) { DotView.DotType.BLACK }
@@ -161,10 +159,6 @@ class CraftView : ViewGroup {
         addView(mBackupDot)
     }
 
-
-    fun reset() {
-        init(mRow, mCol, mWhiteDotNumber)
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -251,7 +245,13 @@ class CraftView : ViewGroup {
                 }
             }
         }
-        mListener?.onSuccess()
+        startSuccessAnim()
+    }
+
+    private fun startSuccessAnim() {
+        for (i in mRow * mCol + 1 until childCount) {
+            (getChildAt(i) as CirqueView).startAnim()
+        }
     }
 
 
@@ -484,10 +484,6 @@ class CraftView : ViewGroup {
     private fun dp2px(value: Int): Int =
         (context.resources.displayMetrics.density * value + 0.5f).toInt()
 
-
-    interface OnCraftViewListener {
-        fun onSuccess()
-    }
 
     enum class CraftStatus {
         IDLE,

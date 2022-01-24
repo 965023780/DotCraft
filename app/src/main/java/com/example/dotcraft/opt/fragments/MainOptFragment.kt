@@ -2,11 +2,11 @@ package com.example.dotcraft.opt.fragments
 
 import android.content.Intent
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import com.example.dotcraft.Constants
 import com.example.dotcraft.R
 import com.example.dotcraft.base.BaseFragment
-import com.example.dotcraft.custom.CustomActivity
 import com.example.dotcraft.rank.RankActivity
 
 class MainOptFragment(listener: FragmentListener) : BaseFragment(listener), View.OnClickListener {
@@ -16,7 +16,7 @@ class MainOptFragment(listener: FragmentListener) : BaseFragment(listener), View
     override fun init() {
         mView!!.findViewById<AppCompatButton>(R.id.btn_level).setOnClickListener(this)
         mView!!.findViewById<AppCompatButton>(R.id.btn_challenge).setOnClickListener(this)
-        mView!!.findViewById<AppCompatButton>(R.id.btn_custom).setOnClickListener(this)
+        mView!!.findViewById<AppCompatButton>(R.id.btn_continue).setOnClickListener(this)
         mView!!.findViewById<AppCompatButton>(R.id.btn_rank).setOnClickListener(this)
     }
 
@@ -28,13 +28,15 @@ class MainOptFragment(listener: FragmentListener) : BaseFragment(listener), View
             R.id.btn_challenge -> {
                 mListener?.changeFragment(Constants.Opt.OPT_STATUS_CHALLENGE)
             }
-            R.id.btn_custom -> {
-                val intent = Intent(activity, CustomActivity::class.java)
-                startActivity(intent)
+            R.id.btn_continue -> {
+                context?.let{
+                    AlertDialog.Builder(it).setTitle("摸了！").setMessage("功能未完成").create().show()
+                }
             }
             R.id.btn_rank -> {
                 val intent = Intent(activity, RankActivity::class.java)
                 startActivity(intent)
+                activity?.finish()
             }
         }
     }

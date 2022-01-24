@@ -1,19 +1,31 @@
 package com.example.dotcraft.challenge
 
-import android.view.View
-import com.example.dotcraft.App
+import com.example.dotcraft.Constants
 
 import com.example.dotcraft.base.BaseCraftActivity
+import com.example.dotcraft.challenge.strategy.ChallengeStrategy
+import com.example.dotcraft.util.SharedPreferencesUtil
 
-class ChallengeActivity : BaseCraftActivity(), View.OnClickListener {
-
+class ChallengeActivity : BaseCraftActivity() {
+    var strategy: ChallengeStrategy? = null
 
     override fun initView() {
         super.initView()
-        val strategy = App.getContext()!!.mChallengeStrategy
-        if (strategy != null) {
-            craftView!!.init(strategy.getRows(), strategy.getCols(), strategy.getWhiteDotNumbers())
+        strategy = intent.getSerializableExtra(Constants.Opt.CHALLENGE) as ChallengeStrategy
+        reset()
+    }
+
+    override fun reset() {
+        strategy?.let {
+            craftView!!.init(it.getRows(), it.getCols(), it.getWhiteDotNumbers())
         }
     }
 
+    override fun saveSuccessInf() {
+        SharedPreferencesUtil.instance.saveRank(strategy!!.getChallengeTag(), mTime)
+    }
+
+    override fun saveContinueInf() {
+
+    }
 }

@@ -15,14 +15,18 @@ class App : Application() {
         }
     }
 
-    var mLevelPassed = 0
-    var mChallengeStrategy: ChallengeStrategy? = null
+    var mLastLevel: Int? = null
 
     override fun onCreate() {
         super.onCreate()
         mContext = this
-        SharedPreferencesUtil.instance.init(applicationContext)
-        mLevelPassed = SharedPreferencesUtil.instance.getLevelPassed()
+        val instance = SharedPreferencesUtil.instance
+        instance.init(applicationContext)
+        getContinueInf(instance)
+    }
+
+    private fun getContinueInf(instance: SharedPreferencesUtil) {
+
     }
 
 

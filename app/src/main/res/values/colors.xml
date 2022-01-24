@@ -11,4 +11,5 @@
     <color name="bg_level">#505050</color>
     <color name="bg_not_pass_level">#FFFFFF</color>
     <color name="bg_pass_level">#4CAF50</color>
+    <color name="bg_cur_level">#F44336</color>
 </resources>

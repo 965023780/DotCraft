@@ -65,4 +65,5 @@ class OptActivity : BaseActivity(), View.OnClickListener, BaseFragment.FragmentL
         changeFragment(Constants.Opt.OPT_STATUS_MAIN)
     }
 
+
 }

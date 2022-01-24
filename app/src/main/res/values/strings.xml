@@ -4,7 +4,7 @@
     <!--opt-->
     <string name="opt_level">关卡模式</string>
     <string name="opt_challenge">挑战模式</string>
-    <string name="opt_custom">自定义模式</string>
+    <string name="opt_continue">继续游戏</string>
     <string name="opt_rank">排行榜</string>
 
     <!--challenge-->
@@ -16,4 +16,9 @@
     <string name="game_start">开始游戏</string>
     <string name="game_reset">重新开始</string>
     <string name="tv_time_default">时间:0 s</string>
+
+    <!--rank-->
+    <string name="rank_id">排名</string>
+    <string name="rank_type">难度</string>
+    <string name="rank_time">时间</string>
 </resources>

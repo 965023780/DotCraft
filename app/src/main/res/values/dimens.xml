@@ -9,4 +9,5 @@
     <dimen name="rv_level_side">300dp</dimen>
     <dimen name="item_level_side">50dp</dimen>
     <dimen name="item_level_padding">25dp</dimen>
+    <dimen name="item_rank_side">80dp</dimen>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import com.example.dotcraft.App
+import com.example.dotcraft.Constants
 import com.example.dotcraft.R
 import com.example.dotcraft.base.BaseFragment
 import com.example.dotcraft.challenge.ChallengeActivity
@@ -26,18 +27,18 @@ class ChallengeOptFragment(listener: FragmentListener) : BaseFragment(listener),
         val intent = Intent(activity, ChallengeActivity::class.java)
         when (v?.id) {
             R.id.btn_simple -> {
-                App.getContext()!!.mChallengeStrategy = SimpleStrategy.instance
+                intent.putExtra(Constants.Opt.CHALLENGE, SimpleStrategy.instance)
             }
             R.id.btn_medium -> {
-                App.getContext()!!.mChallengeStrategy = MediumStrategy.instance
+                intent.putExtra(Constants.Opt.CHALLENGE, MediumStrategy.instance)
             }
             R.id.btn_difficult -> {
-                App.getContext()!!.mChallengeStrategy = DifficultStrategy.instance
+                intent.putExtra(Constants.Opt.CHALLENGE, DifficultStrategy.instance)
             }
         }
-        App.getContext()!!.mChallengeStrategy?.let {
+        activity?.let {
             startActivity(intent)
-            activity?.finish()
+            it.finish()
         }
     }
 }
